@@ -100,6 +100,11 @@ public class TestAnimBlendBug extends SimpleApplication implements ActionListene
         dl.setColor(new ColorRGBA(1f, 1f, 1f, 1.0f));
         rootNode.addLight(dl);
 
+        DirectionalLight dlb = new DirectionalLight();
+        dlb.setDirection(new Vector3f(0.1f, 0.7f, 1).normalizeLocal());
+        dlb.setColor(new ColorRGBA(1f, 1f, 1f, 1.0f));
+        rootNode.addLight(dlb);
+
         Node model1 = (Node) assetManager.loadModel("Models/Ninja/Ninja.mesh.xml");
         Node model2 = (Node) assetManager.loadModel("Models/Ninja/Ninja.mesh.xml");
 //        Node model2 = model1.clone();
@@ -108,8 +113,8 @@ public class TestAnimBlendBug extends SimpleApplication implements ActionListene
         model2.setLocalTranslation(60, 0, 0);
         
         // rotate
-        model1.rotate(1, 0, 0);
-        model2.rotate(0,1, 0);
+        model1.rotate(0,-1.7f, 0);
+        model2.rotate(0,1.7f, 0);
         //\
         AnimControl control1 = model1.getControl(AnimControl.class);
         animNames = control1.getAnimationNames().toArray(new String[0]);

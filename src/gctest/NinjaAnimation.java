@@ -20,10 +20,10 @@ import com.jme3.scene.debug.SkeletonDebugger;
 /** Sample 7 - how to load an OgreXML model and play an animation, 
  * using channels, a controller, and an AnimEventListener. */
 public class NinjaAnimation extends SimpleApplication
-  implements AnimEventListener {
+  implements AnimEventListener, ActionListener {
  
     private AnimChannel channel1, channel2;
-    private String[] animNames;
+//    private String[] animNames;
 
 	private AnimChannel channel;
   private AnimControl control;
@@ -38,9 +38,12 @@ public class NinjaAnimation extends SimpleApplication
   public void simpleInitApp() {
     viewPort.setBackgroundColor(ColorRGBA.LightGray);
     initKeys();
- 
+    flyCam.setMoveSpeed(100f);
+    cam.setLocation( new Vector3f( 0f, 150f, -325f ) );
+    cam.lookAt( new Vector3f( 0f, 100f, 0f ), Vector3f.UNIT_Y );
+
     DirectionalLight dl = new DirectionalLight();
-    dl.setDirection(new Vector3f(-0.1f, -1f, -1).normalizeLocal());
+    dl.setDirection(new Vector3f(-0.1f, -1f, 1).normalizeLocal());
     rootNode.addLight(dl);
     Node model1 = (Node) assetManager.loadModel("Models/Ninja/Ninja.mesh.xml");
     Node model2 = (Node) assetManager.loadModel("Models/Ninja/Ninja.mesh.xml");
@@ -50,11 +53,14 @@ public class NinjaAnimation extends SimpleApplication
     model2.setLocalTranslation(60, 0, 0);
     
     // rotate
-    model1.rotate(1, 0, 0);
-    model2.rotate(0,1, 0);
+    model1.rotate(0,-1.7f, 0);
+    model2.rotate(0,1.7f, 0);
     //\
     AnimControl control1 = model1.getControl(AnimControl.class);
-    animNames = control1.getAnimationNames().toArray(new String[0]);
+    
+ //   for (String anim : control1.getAnimationNames()) { System.out.println(anim); }
+    
+  //  animNames = control1.getAnimationNames().toArray(new String[0]);
     channel1 = control1.createChannel();
     
     AnimControl control2 = model2.getControl(AnimControl.class);
@@ -75,14 +81,14 @@ public class NinjaAnimation extends SimpleApplication
     rootNode.attachChild(model1);
     rootNode.attachChild(model2);
 
-    player = (Node) assetManager.loadModel("Models/Oto/Oto.mesh.xml");
-    player.setLocalScale(0.5f);
-    rootNode.attachChild(player);
- 
-    control = player.getControl(AnimControl.class);
-    control.addListener(this);
-    channel = control.createChannel();
-    channel.setAnim("stand");
+//    player = (Node) assetManager.loadModel("Models/Oto/Oto.mesh.xml");
+//    player.setLocalScale(0.5f);
+//    rootNode.attachChild(player);
+// 
+//    control = player.getControl(AnimControl.class);
+//    control.addListener(this);
+//    channel = control.createChannel();
+//    channel.setAnim("stand");
   }
  
   public void onAnimCycleDone(AnimControl control, AnimChannel channel, String animName) {
@@ -92,7 +98,7 @@ public class NinjaAnimation extends SimpleApplication
       channel.setSpeed(1f);
     }
   }
- 
+
   public void onAnimChange(AnimControl control, AnimChannel channel, String animName) {
     // unused
   }
@@ -119,20 +125,24 @@ public class NinjaAnimation extends SimpleApplication
     inputManager.addMapping("Spin", new KeyTrigger(KeyInput.KEY_N));
     inputManager.addMapping("Stealth", new KeyTrigger(KeyInput.KEY_B));
     inputManager.addMapping("Walk", new KeyTrigger(KeyInput.KEY_V));
-    inputManager.addListener(actionListener, "Attack1,Attack2,Attack3,Backflip,Block," +
-    		"Climb,Crouch,Death1,Death2,HighJump,Idle1,Idle2,Idle3,Jump" +
-    		"JumpNoHeight,Kick,SideKick,Spin,Stealth,Walk");
+
+    inputManager.addListener(this, "Attack1","Attack2","Attack3","Backflip","Block",
+    		"Climb","Crouch","Death1","Death2","HighJump","Idle1","Idle2","Idle3","Jump",
+    		"JumpNoHeight","Kick","SideKick","Spin","Stealth","Walk");
   }
  
-  private ActionListener actionListener = new ActionListener() {
+ // private ActionListener actionListener = new ActionListener() {
     public void onAction(String name, boolean keyPressed, float tpf) {
-      if (name.equals("Walk") && !keyPressed) {
-        if (!channel.getAnimationName().equals("Walk")) {
-          channel.setAnim("Walk", 0.50f);
-          channel.setLoopMode(LoopMode.Loop);
-        }
-      }
+ //   	System.out.print(name);
+//    	if (name.equals("Walk")&& !keyPressed  ){
+
+      //  if (!channel1.getAnimationName().equals("Walk")) {
+        	//channel1.setAnim("Walk", 0.50f);
+        	channel1.setAnim(name, 0.50f);
+        	channel1.setLoopMode(LoopMode.Loop);
+     //   }
+     // }
     }
-  };
+ // };
  
 }
