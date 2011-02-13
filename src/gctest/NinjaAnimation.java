@@ -24,7 +24,8 @@ import com.jme3.scene.debug.SkeletonDebugger;
 public class NinjaAnimation extends SimpleApplication implements
 		AnimEventListener, ActionListener {
 
-	private AnimChannel channel1, channel2;
+	private AnimChannel []channels;
+	private int numChanels;
 	private String[] animNames;
 	private int animNumbers;
 	private boolean isRunAuto;
@@ -42,25 +43,30 @@ public class NinjaAnimation extends SimpleApplication implements
 		isRunAuto = false;
 		viewPort.setBackgroundColor(ColorRGBA.LightGray);
 		initKeys();
-		flyCam.setMoveSpeed(100f);
+		flyCam.setMoveSpeed(1000f);
 		cam.setLocation(new Vector3f(0f, 150f, -425f));
 		cam.lookAt(new Vector3f(0f, 100f, 0f), Vector3f.UNIT_Y);
-
+		numChanels=100;
+		channels = new AnimChannel[numChanels];
 		DirectionalLight dl = new DirectionalLight();
 		dl.setDirection(new Vector3f(-0.1f, -1f, 1).normalizeLocal());
 		rootNode.addLight(dl);
-		Node model1 = (Node) assetManager
+		// add ninja...
+		Node model1 ;
+		for(int nm=0;nm<numChanels;nm++)
+		{
+		model1 = (Node) assetManager
 				.loadModel("Models/Ninja/Ninja.mesh.xml");
-		Node model2 = (Node) assetManager
-				.loadModel("Models/Ninja/Ninja.mesh.xml");
+//		Node model2 = (Node) assetManager
+//				.loadModel("Models/Ninja/Ninja.mesh.xml");
 		// Node model2 = model1.clone();
 
-		model1.setLocalTranslation(-100, 0, 0);
-		model2.setLocalTranslation(100, 0, 0);
+		model1.setLocalTranslation((nm%4)*100,0, nm*100);
+//		model2.setLocalTranslation(100, 0, 0);
 
 		// rotate
-		model1.rotate(0, -1.7f, 0);
-		model2.rotate(0, 1.7f, 0);
+		model1.rotate(0, (nm%2==0)?-1.7f:1.7f, 0);
+		//model2.rotate(0, 1.7f, 0);
 		// \
 		AnimControl control1 = model1.getControl(AnimControl.class);
 		// System.out.print(control1.getAnimationNames().size());
@@ -72,10 +78,10 @@ public class NinjaAnimation extends SimpleApplication implements
 		}
 
 		// animNames = control1.getAnimationNames().toArray(new String[0]);
-		channel1 = control1.createChannel();
+		channels[nm] = control1.createChannel();
 
-		AnimControl control2 = model2.getControl(AnimControl.class);
-		channel2 = control2.createChannel();
+//		AnimControl control2 = model2.getControl(AnimControl.class);
+//		channel2 = control2.createChannel();
 
 		// SkeletonDebugger skeletonDebug = new SkeletonDebugger("skeleton1",
 		// control1.getSkeleton());
@@ -93,8 +99,8 @@ public class NinjaAnimation extends SimpleApplication implements
 		// model2.attachChild(skeletonDebug);
 
 		rootNode.attachChild(model1);
-		rootNode.attachChild(model2);
-
+//		rootNode.attachChild(model2);
+		}
 		// player = (Node) assetManager.loadModel("Models/Oto/Oto.mesh.xml");
 		// player.setLocalScale(0.5f);
 		// rootNode.attachChild(player);
@@ -115,12 +121,12 @@ public class NinjaAnimation extends SimpleApplication implements
 		System.out.println(animName + " done...");
 		if (isRunAuto) {
 			int p = 0;
-			p = (int) (Math.random() * animNumbers);
-			channel1.setAnim(animNames[p], 0.50f);
-			channel1.setLoopMode(LoopMode.DontLoop);
-			p = (int) (Math.random() * animNumbers);
-			channel2.setAnim(animNames[p], 0.50f);
-			channel2.setLoopMode(LoopMode.DontLoop);
+//			p = (int) (Math.random() * animNumbers);
+//			channel1.setAnim(animNames[p], 0.50f);
+//			channel1.setLoopMode(LoopMode.DontLoop);
+//			p = (int) (Math.random() * animNumbers);
+//			channel2.setAnim(animNames[p], 0.50f);
+//			channel2.setLoopMode(LoopMode.DontLoop);
 
 		}
 
@@ -168,32 +174,38 @@ public class NinjaAnimation extends SimpleApplication implements
 	public void onAction(String name, boolean keyPressed, float tpf) {
 		// System.out.print(name);
 		if (name.equals("Random")) {
-			int p = 0;
-			p = (int) (Math.random() * animNumbers);
-			channel1.setAnim(animNames[p], 0.50f);
-			channel1.setLoopMode(LoopMode.Loop);
-			p = (int) (Math.random() * animNumbers);
-			channel2.setAnim(animNames[p], 0.50f);
-			channel2.setLoopMode(LoopMode.Loop);
-		} else if (name.equals("Auto") && keyPressed) {
+			int p = 0,nm=0;
+			for(nm=0;nm<numChanels;nm++)
+			{
+				p = (int) (Math.random() * animNumbers);
+				channels[nm].setAnim(animNames[p], 0.50f);
+			channels[nm].setLoopMode(LoopMode.Loop);
+//			p = (int) (Math.random() * animNumbers);
+//			channel2.setAnim(animNames[p], 0.50f);
+//			channel2.setLoopMode(LoopMode.Loop);
+			}
+			} else if (name.equals("Auto") && keyPressed) {
 			System.out.print(isRunAuto);
 			isRunAuto = !isRunAuto;
 			System.out.println(" ->" + isRunAuto);
 			if (isRunAuto) {
-				int p = 0;
-				p = (int) (Math.random() * animNumbers);
-				channel1.setAnim(animNames[p], 0.50f);
-				channel1.setLoopMode(LoopMode.Loop);
-				p = (int) (Math.random() * animNumbers);
-				channel2.setAnim(animNames[p], 0.50f);
-				channel2.setLoopMode(LoopMode.Loop);
+				int p = 0,nm=0;
+				for(nm=0;nm<numChanels;nm++)
+				{
+					p = (int) (Math.random() * animNumbers);
+					channels[nm].setAnim(animNames[p], 0.50f);
+				channels[nm].setLoopMode(LoopMode.Loop);
+//				p = (int) (Math.random() * animNumbers);
+//				channel2.setAnim(animNames[p], 0.50f);
+//				channel2.setLoopMode(LoopMode.Loop);
+				}
 
 			}
 		} else if (!name.equals("Auto")) {
 			// if (!channel1.getAnimationName().equals("Walk")) {
 			// channel1.setAnim("Walk", 0.50f);
-			channel1.setAnim(name, 0.50f);
-			channel1.setLoopMode(LoopMode.Loop);
+			channels[0].setAnim(name, 0.50f);
+			channels[0].setLoopMode(LoopMode.Loop);
 			// }
 		}
 	}
