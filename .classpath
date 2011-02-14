@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="/jme3/bin" sourcepath="/jme3/src/core">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="jme3"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/jme3/lib/lwjgl/2.6_jar/lwjgl.jar"/>
+	<classpathentry kind="lib" path="/jme3/lib/android/android.jar"/>
+	<classpathentry kind="lib" path="/jme3/lib/antlibs/jsch-0.1.42.jar"/>
+	<classpathentry kind="lib" path="/jme3/lib/jbullet/asm-all-3.1.jar"/>
+	<classpathentry kind="lib" path="/jme3/lib/jbullet/jbullet.jar"/>
+	<classpathentry kind="lib" path="/jme3/lib/jbullet/stack-alloc.jar"/>
+	<classpathentry kind="lib" path="/jme3/lib/jbullet/vecmath.jar"/>
+	<classpathentry kind="lib" path="/jme3/lib/jheora/jheora-debug-0.6.0.jar"/>
+	<classpathentry kind="lib" path="/jme3/lib/jheora/jheora-jst-debug-0.6.0.jar"/>
+	<classpathentry kind="lib" path="/jme3/lib/jogg/j-ogg-oggd.jar"/>
+	<classpathentry kind="lib" path="/jme3/lib/jogg/j-ogg-vorbisd.jar"/>
+	<classpathentry kind="lib" path="/jme3/lib/jogl/jogl.jar"/>
+	<classpathentry kind="lib" path="/jme3/lib/jogl/gluegen-rt.jar"/>
+	<classpathentry kind="lib" path="/jme3/lib/jogl/jME3-jogl-natives.jar"/>
+	<classpathentry kind="lib" path="/jme3/lib/jogl2/gluegen-rt.jar"/>
+	<classpathentry kind="lib" path="/jme3/lib/jogl2/jogl.all.jar"/>
+	<classpathentry kind="lib" path="/jme3/lib/jogl2/nativewindow.all.jar"/>
+	<classpathentry kind="lib" path="/jme3/lib/jogl2/nativewindow.os.x11.jar"/>
+	<classpathentry kind="lib" path="/jme3/lib/jogl2/newt.all.jar"/>
+	<classpathentry kind="lib" path="/jme3/lib/jogl2/newt.os.x11.jar"/>
+	<classpathentry kind="lib" path="/jme3/lib/swing-layout/swing-layout-1.0.4.jar"/>
+	<classpathentry kind="lib" path="/jme3/lib/swingext/swing-layout-1.0.3.jar"/>
+	<classpathentry kind="lib" path="/jme3/lib/lwjgl/jME3-lwjgl-natives-2.6.jar"/>
+	<classpathentry kind="lib" path="/jme3/lib/lwjgl/jME3-lwjgl-natives.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
