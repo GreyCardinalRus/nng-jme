@@ -366,7 +366,7 @@ public class TestFancyCar extends SimpleApplication implements ActionListener {
         //	cam.lookAt(carNode.getWorldTranslation(), Vector3f.UNIT_Y);
     	Vector3f playerR = carNode.getWorldRotation().getRotationColumn(0);
     	cam.setLocation(carNode.getWorldTranslation().add(0, 5, 0));
-    	cam.lookAt(player.getPhysicsLocation().add(0, 0, 0), new Vector3f(playerR.x,playerR.y,playerR.z));
+    	//cam.lookAt(player.getPhysicsLocation().add(0, 0, 0), new Vector3f(playerR.x,playerR.y,playerR.z));
     	//
     	//Quaternion i= carNode.getWorldRotation().getRotationColumn(0) 
 //    	cam.setLocation(carNode.getWorldTranslation().add(0, 5, 0));
