@@ -139,7 +139,7 @@ public class HelloPhysics extends SimpleApplication {
     float startpt = brickLength / 4;
     float height = 0;
     for (int j = 0; j < 15; j++) {
-      for (int i = 0; i < 4; i++) {
+      for (int i = 0; i < 5; i++) {
         Vector3f vt =
          new Vector3f(i * brickLength * 2 + startpt, brickHeight + height, 0);
         makeBrick(vt);
