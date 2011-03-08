@@ -56,6 +56,7 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
+//import com.jme3.math.Quaternion;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
@@ -203,25 +204,7 @@ public class TestFancyCar extends SimpleApplication implements ActionListener {
         return bulletAppState.getPhysicsSpace();
     }
 
-    public void setupFloor() {
-        Material mat = assetManager.loadMaterial("Textures/Terrain/BrickWall/BrickWall.j3m");
-        mat.getTextureParam("DiffuseMap").getTextureValue().setWrap(WrapMode.Repeat);
-//        mat.getTextureParam("NormalMap").getTextureValue().setWrap(WrapMode.Repeat);
-//        mat.getTextureParam("ParallaxMap").getTextureValue().setWrap(WrapMode.Repeat);
-
-        Box floor = new Box(Vector3f.ZERO, 140, 1f, 140);
-        floor.scaleTextureCoordinates(new Vector2f(112.0f, 112.0f));
-        Geometry floorGeom = new Geometry("Floor", floor);
-        floorGeom.setShadowMode(ShadowMode.Receive);
-        floorGeom.setMaterial(mat);
-
-        PhysicsNode tb = new PhysicsNode(floorGeom, new MeshCollisionShape(floorGeom.getMesh()), 0);
-        tb.setLocalTranslation(new Vector3f(0f, -6, 0f));
-//        tb.attachDebugShape(assetManager);
-        rootNode.attachChild(tb);
-        getPhysicsSpace().add(tb);
-    }
-
+  
     private Geometry findGeom(Spatial spatial, String name) {
         if (spatial instanceof Node) {
             Node node = (Node) spatial;
@@ -302,7 +285,7 @@ public class TestFancyCar extends SimpleApplication implements ActionListener {
         player.addWheel(wheel_bl.getParent(), box.getCenter().add(0, -back_wheel_h, 0),
                 wheelDirection, wheelAxle, 0.2f, wheelRadius, false);
 
-        player.attachDebugShape(assetManager);
+//        player.attachDebugShape(assetManager);
         player.getWheel(2).setFrictionSlip(4);
         player.getWheel(3).setFrictionSlip(4);
 
@@ -365,10 +348,36 @@ public class TestFancyCar extends SimpleApplication implements ActionListener {
     public void simpleUpdate(float tpf) {
         //	cam.lookAt(carNode.getWorldTranslation(), Vector3f.UNIT_Y);
     	Vector3f playerR = carNode.getWorldRotation().getRotationColumn(0);
-    	cam.setLocation(carNode.getWorldTranslation().add(0, 5, 0));
+    	cam.setLocation(carNode.getWorldTranslation().add(0, 2, 0));
     	//cam.lookAt(player.getPhysicsLocation().add(0, 0, 0), new Vector3f(playerR.x,playerR.y,playerR.z));
     	//
     	//Quaternion i= carNode.getWorldRotation().getRotationColumn(0) 
 //    	cam.setLocation(carNode.getWorldTranslation().add(0, 5, 0));
+    }
+    public void updateCamera() {
+        rootNode.updateGeometricState();
+
+        Vector3f pos = carNode.getWorldTranslation().clone();
+        Quaternion rot = carNode.getWorldRotation();
+        Vector3f dir = rot.getRotationColumn(2);
+
+        // make it XZ only
+        Vector3f camPos = new Vector3f(dir);
+        camPos.setY(0);
+        camPos.normalizeLocal();
+
+        // negate and multiply by distance from object
+        camPos.negateLocal();
+        camPos.multLocal(15);
+
+        // add Y distance
+        camPos.setY(2);
+        camPos.addLocal(pos);
+        cam.setLocation(camPos);
+
+        Vector3f lookAt = new Vector3f(dir);
+        lookAt.multLocal(7); // look at dist
+        lookAt.addLocal(pos);
+        cam.lookAt(lookAt, Vector3f.UNIT_Y);
     }
 }

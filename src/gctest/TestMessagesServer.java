@@ -34,6 +34,7 @@ public class TestMessagesServer {
                     message.getClient().send(new PongMessage());
                 }else if (message instanceof PongMessage){
                     System.out.println("Received pong message!");
+                }else{System.out.println("Received unknow message!");    
                 }
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -51,18 +52,17 @@ public class TestMessagesServer {
         server.start();
 
 
-//        Client client = new Client("localhost", 5110, 5110);
-//        client.start();
+        Client client = new Client("localhost", 5110, 5110);
+        client.start();
 
 
         server.addMessageListener(new PingResponder(), PingMessage.class);
-//       client.addMessageListener(new PingResponder(), PongMessage.class);
-
+       client.addMessageListener(new PingResponder(), PongMessage.class);
 
         Thread.sleep(100);
 
 
-  //      System.out.println("Sending ping message..");
-  //      client.send(new PingMessage());
+//      System.out.println("Sending ping message..");
+       client.send(new PingMessage());
     }
 }
