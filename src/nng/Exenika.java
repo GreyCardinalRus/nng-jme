@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.util.List;
 
+
+
 import com.jme3.animation.AnimChannel;
 import com.jme3.animation.AnimControl;
 import com.jme3.animation.AnimEventListener;
@@ -45,7 +47,7 @@ AnimEventListener, ActionListener {
 		@Override
 		public void messageReceived(Message message) {
 			if (message instanceof ServerMessage) {
-				System.out.println("Received server message!" + ((ServerMessage)message).msg);
+				System.out.println("CLN:Received server message! " + ((ServerMessage)message).msg);
 //				createbox();
 //				System.out.println("Sending pong message..");
 //				Box b = new Box(Vector3f.ZERO, 1, 1, 1);
@@ -62,9 +64,9 @@ AnimEventListener, ActionListener {
 
 					SrvMessage.msg = "Server ansver ..."
 							+ message.getClient().getClientID();
-					System.out.println("Received message: "
+					System.out.println("SRV:Received message: "
 							+ ((ClientMessage) message).msg);
-					System.out.println("Sending message.. " + SrvMessage.msg);
+					System.out.println("SRV:Sending message.. " + SrvMessage.msg);
 					message.getClient().send(SrvMessage);
 					// System.out.println(helloMessage.msg);
 				} catch (IOException ex) {
@@ -160,6 +162,7 @@ AnimEventListener, ActionListener {
 				}
 			}
 			client.start();
+			client.addMessageListener(new MessageResponder(), ServerMessage.class);
 			initKeys();
 		}
 //		Box b = new Box(Vector3f.ZERO, 1, 1, 1);
