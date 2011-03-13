@@ -1,9 +1,5 @@
 package gctest;
 
-import gctest.TestMessagesClient.PingMessage;
-//import gctest.TestMessagesClient.PingResponder;
-import gctest.TestMessagesClient.PongMessage;
-
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.List;
@@ -30,7 +26,6 @@ import com.jme3.math.Vector3f;
 import com.jme3.network.connection.Client;
 import com.jme3.network.events.MessageAdapter;
 import com.jme3.network.message.Message;
-import com.jme3.network.serializing.Serializable;
 import com.jme3.network.serializing.Serializer;
 import com.jme3.scene.Node;
 
@@ -48,36 +43,8 @@ public class NinjaAnimation extends SimpleApplication implements
 	private String[] animNames;
 	private int animNumbers;
 	private boolean isRunAuto;
-	private AnimChannel channel;
-	private AnimControl control;
 	Node player;
 
-	@Serializable
-	public static class ServerMessage extends Message {
-		public String msg;
-	}
-
-	@Serializable
-	public static class ClientMessage extends Message {
-		public String msg;
-	}
-
-	private static class PingResponder extends MessageAdapter {
-		@Override
-		public void messageReceived(Message message) {
-			try {
-				if (message instanceof PingMessage) {
-					System.out.println("Received ping message!");
-					System.out.println("Sending pong message..");
-					message.getClient().send(new PongMessage());
-				} else if (message instanceof PongMessage) {
-					System.out.println("Received pong message!");
-				}
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			}
-		}
-	}
 
 	private static Client client;
 
@@ -230,7 +197,7 @@ public class NinjaAnimation extends SimpleApplication implements
 		// }
 		System.out.println(animName + " done...");
 		if (isRunAuto) {
-			int p = 0;
+//			int p = 0;
 			// p = (int) (Math.random() * animNumbers);
 			// channel1.setAnim(animNames[p], 0.50f);
 			// channel1.setLoopMode(LoopMode.DontLoop);

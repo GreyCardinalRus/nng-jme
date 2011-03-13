@@ -41,11 +41,8 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.bounding.BoundingBox;
 import com.jme3.bullet.PhysicsSpace;
 import com.jme3.bullet.collision.shapes.CollisionShape;
-import com.jme3.bullet.collision.shapes.MeshCollisionShape;
 import com.jme3.bullet.control.RigidBodyControl;
 import com.jme3.bullet.control.VehicleControl;
-import com.jme3.bullet.nodes.PhysicsNode;
-import com.jme3.bullet.objects.VehicleWheel;
 import com.jme3.bullet.util.CollisionShapeFactory;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
@@ -56,15 +53,12 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
 import com.jme3.math.Matrix3f;
 import com.jme3.math.Quaternion;
-//import com.jme3.math.Quaternion;
-import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.renderer.queue.RenderQueue.ShadowMode;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import com.jme3.scene.shape.Box;
 import com.jme3.shadow.BasicShadowRenderer;
 import com.jme3.terrain.geomipmap.TerrainLodControl;
 import com.jme3.terrain.geomipmap.TerrainQuad;
@@ -347,7 +341,7 @@ public class TestFancyCar extends SimpleApplication implements ActionListener {
     @Override
     public void simpleUpdate(float tpf) {
         //	cam.lookAt(carNode.getWorldTranslation(), Vector3f.UNIT_Y);
-    	Vector3f playerR = carNode.getWorldRotation().getRotationColumn(0);
+    	//Vector3f playerR = carNode.getWorldRotation().getRotationColumn(0);
     	cam.setLocation(carNode.getWorldTranslation().add(0, 2, 0));
     	//cam.lookAt(player.getPhysicsLocation().add(0, 0, 0), new Vector3f(playerR.x,playerR.y,playerR.z));
     	//

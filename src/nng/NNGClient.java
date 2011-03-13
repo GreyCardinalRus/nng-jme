@@ -12,7 +12,6 @@ import com.jme3.network.connection.Client;
 //import com.jme3.network.connection.Server;
 import com.jme3.network.events.MessageAdapter;
 import com.jme3.network.message.Message;
-import com.jme3.network.message.StreamDataMessage;
 import com.jme3.network.serializing.Serializer;
 import com.jme3.network.serializing.Serializable;
 //import com.jme3.network.serializing.Serializer;

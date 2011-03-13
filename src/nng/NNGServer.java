@@ -1,10 +1,5 @@
 package nng;
 
-import com.jme3.system.JmeContext;
-import com.jme3.system.JmeContext.Type;
-import com.jme3.app.Application;
-//import com.jme3.network.connection.Client;
-import com.jme3.network.connection.Client;
 import com.jme3.network.connection.Server;
 import com.jme3.network.events.MessageAdapter;
 import com.jme3.network.message.Message;
@@ -15,14 +10,7 @@ import com.jme3.network.serializing.Serializer;
 //import gctest.TestMessagesServer.PingMessage;
 //import gctest.TestMessagesServer.PongMessage;
 
-import gctest.TestMessagesServer.PingMessage;
-//import gctest.TestMessagesServer.PingResponder;
-import gctest.TestMessagesServer.PongMessage;
-
 import java.io.IOException;
-
-//import nng.NNGClient.MessageResponder;
-import nng.NNGClient.ServerMessage;
 
 //import nng.NNGClient.HelloMessage;
 
