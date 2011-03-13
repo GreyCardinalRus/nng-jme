@@ -1,7 +1,5 @@
 package nng;
 
-import gctest.NinjaAnimation.ClientMessage;
-
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.List;
@@ -11,7 +9,6 @@ import java.util.List;
 import com.jme3.animation.AnimChannel;
 import com.jme3.animation.AnimControl;
 import com.jme3.animation.AnimEventListener;
-import com.jme3.animation.LoopMode;
 import com.jme3.app.SimpleApplication;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
@@ -25,11 +22,9 @@ import com.jme3.network.connection.Client;
 import com.jme3.network.connection.Server;
 import com.jme3.network.events.MessageAdapter;
 import com.jme3.network.message.Message;
-import com.jme3.network.message.StreamDataMessage;
 import com.jme3.network.serializing.Serializable;
 import com.jme3.network.serializing.Serializer;
 import com.jme3.system.JmeContext;
-import com.jme3.system.JmeContext.Type;
 
 public class Exenika extends SimpleApplication implements
 AnimEventListener, ActionListener {
